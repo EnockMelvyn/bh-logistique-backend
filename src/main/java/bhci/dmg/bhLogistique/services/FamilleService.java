@@ -37,6 +37,13 @@ public class FamilleService {
                 new IllegalStateException(" L'id famille:" + idFamille +" n'existe pas")
         );
 
+        boolean familleCodeExists = familleRepository.findByCodeFamille(famille.getCodeFamille()).isPresent();
+        if (familleCodeExists) {
+            Long id = familleRepository.findByCodeFamille(famille.getCodeFamille()).get().getIdFamille();
+            if (idFamille != id) {
+                throw new IllegalStateException("Ce code sous-famille est déjà utilisé");
+            }
+        }
         familleToUpdate.setCodeFamille(famille.getCodeFamille());
         familleToUpdate.setLibelleFamille(famille.getLibelleFamille());
 
