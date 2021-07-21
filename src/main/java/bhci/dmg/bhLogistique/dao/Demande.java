@@ -1,5 +1,6 @@
 package bhci.dmg.bhLogistique.dao;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Table(name = "Demande")
 @Data
 @NoArgsConstructor
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
 public class Demande implements Serializable {
 
 
@@ -58,4 +60,20 @@ public class Demande implements Serializable {
     @Column(name = "modified_by")
     private String modifiedBy;
 
+    @OneToMany(
+    mappedBy = "demande",
+    cascade = CascadeType.ALL,
+    orphanRemoval = true)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private List<DemandeArticle> demandeArticles;
+
+    public void addArticles(DemandeArticle demandeArticle) {
+        demandeArticles.add(demandeArticle);
+        demandeArticle.setDemande(this);
+    }
+
+    public void removeArticle(DemandeArticle demandeArticle) {
+        demandeArticles.remove(demandeArticle);
+        demandeArticle.setDemande(null);
+    }
 }

@@ -1,5 +1,7 @@
 package bhci.dmg.bhLogistique.dao;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,6 +11,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "demande_article")
 @Data
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
 public class DemandeArticle implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -17,13 +20,14 @@ public class DemandeArticle implements Serializable {
     @Id
     @Column(name = "id_demande_article", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long idDemandeArticle;
+    private Long idDemandeArticle;
 
     @Column(name = "quantite")
     private int quantite;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "demande_id")
+    @JsonIgnore
     private Demande demande;
 
     @ManyToOne
@@ -49,5 +53,17 @@ public class DemandeArticle implements Serializable {
         this.quantite = quantite;
         this.demande = demande;
         this.article = article;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DemandeArticle )) return false;
+        return idDemandeArticle != null && idDemandeArticle.equals(((DemandeArticle) o).getIdDemandeArticle());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

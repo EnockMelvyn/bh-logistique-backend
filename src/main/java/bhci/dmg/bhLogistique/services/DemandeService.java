@@ -1,10 +1,12 @@
 package bhci.dmg.bhLogistique.services;
 
 import bhci.dmg.bhLogistique.dao.Demande;
+import bhci.dmg.bhLogistique.dao.DemandeArticle;
 import bhci.dmg.bhLogistique.repository.DemandeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,6 +39,25 @@ public class DemandeService {
     }
 
     public Demande createDemande(Demande demande){
-        return demandeRepository.save(demande);
+        Demande newDemande = new Demande();
+
+        System.out.println(demande.getDemandeArticles().toString());
+
+        newDemande.setDateDemande(demande.getDateDemande());
+        newDemande.setDemandeur(demande.getDemandeur());
+        newDemande.setStatutDemande(demande.getStatutDemande());
+        newDemande.setEstimation(demande.getEstimation());
+        newDemande.setUrgent(demande.isUrgent());
+        newDemande.setJustifUrgence(demande.getJustifUrgence());
+        newDemande.setNumRef(demande.getNumRef());
+        newDemande.setObservation(demande.getObservation());
+//        newDemande.setDemandeArticles(demande.getDemandeArticles());
+        newDemande.setDemandeArticles(new ArrayList<DemandeArticle>())  ;
+        for(DemandeArticle demandeArticle: demande.getDemandeArticles()){
+            DemandeArticle newDemArticle = new DemandeArticle(demandeArticle.getQuantite(), demandeArticle.getDemande(), demandeArticle.getArticle());
+            newDemande.addArticles(newDemArticle);
+        }
+//        System.out.println(newDemande.getDemandeArticles().toString());
+        return demandeRepository.save(newDemande);
     }
 }

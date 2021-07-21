@@ -1,5 +1,6 @@
 package bhci.dmg.bhLogistique.dao;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
