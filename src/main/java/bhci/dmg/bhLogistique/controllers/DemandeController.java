@@ -55,7 +55,17 @@ public class DemandeController {
     }
 
     @PutMapping("/{idDemande}")
-    public ResponseEntity<Demande> updateFamille(@PathVariable Long idDemande, @RequestBody Demande demande) {
+    public ResponseEntity<Demande> updateDemande(@PathVariable Long idDemande, @RequestBody Demande demande) {
         return new ResponseEntity<>(demandeService.updateDemande(idDemande, demande), HttpStatus.OK);
+    }
+
+    @PutMapping("/validate/{idDemande}")
+    public ResponseEntity<Demande> validateOrRefuseDemande(@PathVariable Long idDemande) {
+        return new ResponseEntity<>(demandeService.validateDemande(idDemande), HttpStatus.OK);
+    }
+
+    @PutMapping("/refuse/{idDemande}")
+    public ResponseEntity<Demande> refuseDemande(@PathVariable Long idDemande) {
+        return new ResponseEntity<>(demandeService.refuseDemande(idDemande), HttpStatus.OK);
     }
 }

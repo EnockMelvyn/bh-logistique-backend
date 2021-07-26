@@ -2,6 +2,7 @@ package bhci.dmg.bhLogistique.services;
 
 import bhci.dmg.bhLogistique.dao.Demande;
 import bhci.dmg.bhLogistique.dao.DemandeArticle;
+import bhci.dmg.bhLogistique.dao.StatutDemande;
 import bhci.dmg.bhLogistique.repository.DemandeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,24 @@ public class DemandeService {
                 new IllegalStateException(" L'id famille:" + idDemande+" n'existe pas"));
 
         demande1.setStatutDemande(demande.getStatutDemande());
+
+        return demandeRepository.save(demande1);
+    }
+
+    public Demande validateDemande (Long idDemande ){
+        Demande demande1 = demandeRepository.findById(idDemande).orElseThrow(() ->
+                new IllegalStateException(" L'id famille:" + idDemande+" n'existe pas"));
+
+        demande1.setStatutDemande(StatutDemande.VALIDEE);
+
+        return demandeRepository.save(demande1);
+    }
+
+    public Demande refuseDemande (Long idDemande){
+        Demande demande1 = demandeRepository.findById(idDemande).orElseThrow(() ->
+                new IllegalStateException(" L'id famille:" + idDemande+" n'existe pas"));
+
+        demande1.setStatutDemande(StatutDemande.REFUSEE);
 
         return demandeRepository.save(demande1);
     }

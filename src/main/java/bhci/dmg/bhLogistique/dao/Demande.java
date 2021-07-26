@@ -48,6 +48,9 @@ public class Demande implements Serializable {
     @Column(name = "justif_urgence")
     private String justifUrgence;
 
+    @Column(name = "motif_rejet")
+    private String motifRejet;
+
     @Column(name = "created_at")
     private LocalDate createdAt;
 
