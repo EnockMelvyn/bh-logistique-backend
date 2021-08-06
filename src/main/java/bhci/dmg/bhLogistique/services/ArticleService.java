@@ -32,6 +32,12 @@ public class ArticleService {
         );
     }
 
+    public Article deleteArticleById(Long idArticle){
+        return  articleRepository.findById(idArticle).orElseThrow(() ->
+                new IllegalStateException(" L'id famille:" + idArticle +" n'existe pas")
+        );
+    }
+
     public Article updateArticle(Long idArticle, Article article){
         Article articleToUpdate = articleRepository.findById(idArticle).orElseThrow(() ->
                 new IllegalStateException(" L'id famille:" + idArticle +" n'existe pas")

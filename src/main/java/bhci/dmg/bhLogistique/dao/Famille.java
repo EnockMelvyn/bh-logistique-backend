@@ -25,7 +25,7 @@ public class Famille implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_famille", nullable = false)
-    private long idFamille;
+    private Long idFamille;
 
     @Column(name = "libelle_famille")
     private String libelleFamille;

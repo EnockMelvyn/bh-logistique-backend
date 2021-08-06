@@ -40,6 +40,7 @@ public class FamilleService {
         boolean familleCodeExists = familleRepository.findByCodeFamille(famille.getCodeFamille()).isPresent();
         if (familleCodeExists) {
             Long id = familleRepository.findByCodeFamille(famille.getCodeFamille()).get().getIdFamille();
+            System.out.println("id frontend:"+idFamille+" , idbackend:"+id);
             if (idFamille != id) {
                 throw new IllegalStateException("Ce code sous-famille est déjà utilisé");
             }
