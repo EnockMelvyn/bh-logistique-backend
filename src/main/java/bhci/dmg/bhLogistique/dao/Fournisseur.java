@@ -6,13 +6,13 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "fournisseur")
+@Table(name = "t_fournisseur")
 @Data
 public class Fournisseur {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_demande", nullable = false)
+    @Column(name = "id_fournisseur", nullable = false)
     private Long idFournisseur;
     private String nomFournisseur;
     private String codeFournisseur;

@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "Article")
+@Table(name = "t_article")
 @Data
 public class Article implements Serializable {
 

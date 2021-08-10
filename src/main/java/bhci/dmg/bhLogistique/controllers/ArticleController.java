@@ -49,6 +49,17 @@ public class ArticleController {
         return new ResponseEntity<>(article, HttpStatus.OK);
     }
 
+//    @GetMapping()
+//    public ResponseEntity<Article> getArticleByLibelle(@RequestParam(required = false) String libelleArticle){
+//        Article article = new Article();
+//        article= articleService.getArticleByLibelle(libelleArticle);
+//
+//        if (article == null) {
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//        return new ResponseEntity<>(article, HttpStatus.OK);
+//    }
+
     @PostMapping
     public ResponseEntity<Article> createArticle(@RequestBody Article article) {
         return new ResponseEntity<>(articleService.createArticle(article), HttpStatus.CREATED);

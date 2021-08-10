@@ -26,6 +26,12 @@ public class ArticleService {
         );
     }
 
+    public Article getArticleByLibelle(String libelleArticle) {
+        return articleRepository.findByLibelleArticle(libelleArticle).orElseThrow(() ->
+                new IllegalStateException(" Le libelle sous famille:" + libelleArticle +" n'existe pas")
+        );
+    }
+
     public Article getArticleById(Long idArticle){
         return  articleRepository.findById(idArticle).orElseThrow(() ->
                 new IllegalStateException(" L'id famille:" + idArticle +" n'existe pas")

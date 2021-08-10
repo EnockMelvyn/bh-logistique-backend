@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "demande_article")
+@Table(name = "t_demande_article")
 @Data
 @JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
 public class DemandeArticle implements Serializable {

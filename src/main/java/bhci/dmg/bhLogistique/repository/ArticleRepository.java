@@ -15,4 +15,6 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     List<Article> findBySousFamille(SousFamille sousfamille);
 
+    Optional<Article> findByLibelleArticle(String libelleArticle);
+
 }
