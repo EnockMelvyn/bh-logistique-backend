@@ -49,6 +49,7 @@ public class SousFamilleService {
 
         sousFamilleToUpdate.setCodeSousFamille(sousFamille.getCodeSousFamille());
         sousFamilleToUpdate.setLibelleSousFamille(sousFamille.getLibelleSousFamille());
+        sousFamilleToUpdate.setFamille(sousFamille.getFamille());
 
         return sousFamilleRepository.save(sousFamilleToUpdate);
     }

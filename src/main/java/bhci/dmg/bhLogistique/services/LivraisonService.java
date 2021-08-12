@@ -47,7 +47,7 @@ public class LivraisonService {
         );
 
 
-        livraisonToUpdate.setFournisseurId(livraison.getFournisseurId());
+        livraisonToUpdate.setFournisseur(livraison.getFournisseur());
         livraisonToUpdate.setDateLivraison(livraison.getDateLivraison());
         livraisonToUpdate.setNumeroBl(livraison.getNumeroBl());
 
@@ -65,7 +65,7 @@ public class LivraisonService {
 
         livraison1.setDateLivraison(livraison.getDateLivraison());
         livraison1.setNumeroBl(livraison.getNumeroBl());
-        livraison1.setFournisseurId(livraison.getFournisseurId());
+        livraison1.setFournisseur(livraison.getFournisseur());
         livraison1.setLivraisonDetails(new ArrayList<>());
         for(LivraisonDetail livraisonDetail: livraison.getLivraisonDetails()){
             LivraisonDetail newLivDet = new LivraisonDetail();

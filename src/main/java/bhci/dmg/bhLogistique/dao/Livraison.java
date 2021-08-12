@@ -5,25 +5,26 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Table(name = "t_livraison")
 @Data
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
 public class Livraison implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Column(name = "date_livraison")
-    private LocalDateTime dateLivraison;
+    private LocalDate dateLivraison;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fournisseur_id")
-    private Fournisseur fournisseurId;
+    private Fournisseur fournisseur;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_livraison", nullable = false)
     private Long idLivraison;
 
@@ -35,6 +36,7 @@ public class Livraison implements Serializable {
     orphanRemoval = true)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<LivraisonDetail> livraisonDetails;
+
 
     public void addLivraisonDetail(LivraisonDetail livDet) {
         livraisonDetails.add(livDet);

@@ -60,6 +60,8 @@ public class ArticleService {
 
         articleToUpdate.setCodeArticle(article.getCodeArticle());
         articleToUpdate.setLibelleArticle(article.getLibelleArticle());
+        articleToUpdate.setSousFamille(article.getSousFamille());
+
 
         return articleRepository.save(articleToUpdate);
     }

@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.Optional;
 
-public interface LivraisonRepository extends JpaRepository<Livraison, Long>, JpaSpecificationExecutor<Livraison> {
+public interface LivraisonRepository extends JpaRepository<Livraison, Long>{
 
     Optional<Livraison> findByNumeroBl(String numeroBl);
 }
