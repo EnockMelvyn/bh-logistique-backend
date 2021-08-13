@@ -1,6 +1,5 @@
 package bhci.dmg.bhLogistique.services;
 
-import bhci.dmg.bhLogistique.dao.DemandeArticle;
 import bhci.dmg.bhLogistique.dao.Livraison;
 import bhci.dmg.bhLogistique.dao.LivraisonDetail;
 import bhci.dmg.bhLogistique.repository.LivraisonRepository;
@@ -66,7 +65,7 @@ public class LivraisonService {
         livraison1.setDateLivraison(livraison.getDateLivraison());
         livraison1.setNumeroBl(livraison.getNumeroBl());
         livraison1.setFournisseur(livraison.getFournisseur());
-        livraison1.setLivraisonDetails(new ArrayList<>());
+        livraison1.setLivraisonDetails(new ArrayList<LivraisonDetail>());
         for(LivraisonDetail livraisonDetail: livraison.getLivraisonDetails()){
             LivraisonDetail newLivDet = new LivraisonDetail();
             newLivDet.setLivraison(livraisonDetail.getLivraison());
@@ -76,6 +75,6 @@ public class LivraisonService {
 
             livraison1.addLivraisonDetail(newLivDet);
         }
-        return livraisonRepository.save(livraison);
+        return livraisonRepository.save(livraison1);
     }
 }

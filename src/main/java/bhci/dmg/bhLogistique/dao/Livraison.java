@@ -2,6 +2,7 @@ package bhci.dmg.bhLogistique.dao;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "t_livraison")
 @Data
+@NoArgsConstructor
 @JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
 public class Livraison implements Serializable {
 
@@ -36,7 +38,6 @@ public class Livraison implements Serializable {
     orphanRemoval = true)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<LivraisonDetail> livraisonDetails;
-
 
     public void addLivraisonDetail(LivraisonDetail livDet) {
         livraisonDetails.add(livDet);
