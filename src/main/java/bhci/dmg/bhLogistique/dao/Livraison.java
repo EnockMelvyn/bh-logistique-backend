@@ -21,7 +21,7 @@ public class Livraison implements Serializable {
     @Column(name = "date_livraison")
     private LocalDate dateLivraison;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "fournisseur_id")
     private Fournisseur fournisseur;
 

@@ -1,14 +1,17 @@
 package bhci.dmg.bhLogistique.dao;
 
 import bhci.dmg.bhLogistique.repository.FournisseurRepository;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "t_fournisseur")
 @Data
-public class Fournisseur {
+public class Fournisseur implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,6 +20,7 @@ public class Fournisseur {
     private String nomFournisseur;
     private String codeFournisseur;
     private String contactFournisseur;
+
 
 
     public Fournisseur(){

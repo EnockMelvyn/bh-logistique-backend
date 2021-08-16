@@ -24,13 +24,13 @@ public class FournisseurService {
     }
     public Fournisseur getFournisseurById(Long idFournisseur){
         return  fournisseurRepository.findById(idFournisseur).orElseThrow(() ->
-                new IllegalStateException(" L'id famille:" + idFournisseur +" n'existe pas")
+                new IllegalStateException(" L'id fournisseur:" + idFournisseur +" n'existe pas")
         );
     }
 
     public Fournisseur deleteFournisseurById(Long idFournisseur){
         return  fournisseurRepository.findById(idFournisseur).orElseThrow(() ->
-                new IllegalStateException(" L'id famille:" + idFournisseur +" n'existe pas")
+                new IllegalStateException(" L'id fournisseur:" + idFournisseur +" n'existe pas")
         );
     }
 

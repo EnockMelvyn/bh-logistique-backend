@@ -14,7 +14,7 @@ public class LivraisonDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "article_id")
     private Article article;
 
@@ -23,7 +23,7 @@ public class LivraisonDetail implements Serializable {
     @Column(name = "id_livraison_detail", nullable = false)
     private Long idLivraisonDetail;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "livraison_id")
     @JsonIgnore
     private Livraison livraison;

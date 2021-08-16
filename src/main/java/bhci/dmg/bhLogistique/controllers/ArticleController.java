@@ -66,7 +66,7 @@ public class ArticleController {
     }
 
     @PutMapping("/{idArticle}")
-    public ResponseEntity<Article> updateFamille(@PathVariable Long idArticle, @RequestBody Article article) {
+    public ResponseEntity<Article> updateArticle(@PathVariable Long idArticle, @RequestBody Article article) {
         return new ResponseEntity<>(articleService.updateArticle(idArticle, article), HttpStatus.OK);
     }
 }
