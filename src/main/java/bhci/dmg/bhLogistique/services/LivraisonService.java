@@ -16,9 +16,9 @@ public class LivraisonService {
     LivraisonRepository livraisonRepository;
 
     public List<Livraison> getAllLivraisons() {
-        List<Livraison> livraisons= new ArrayList<Livraison>();
-        livraisonRepository.findAll().forEach(livraisons::add);
-        return livraisons;
+        /*List<Livraison> livraisons= new ArrayList<Livraison>();
+        livraisonRepository.findAll().forEach(livraisons::add);*/
+        return livraisonRepository.findAll();
     }
 
 
