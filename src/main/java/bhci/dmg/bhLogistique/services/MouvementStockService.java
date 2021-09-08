@@ -77,10 +77,9 @@ public class MouvementStockService {
             mouvEnregistres.add(new MouvementStock(
                     mouvementStock1.getDateMouvement(),
                     mouvementStock1.getArticle(),
-                    mouvementStock1.getStockInitial(),
-                    mouvementStock1.getEntree(),
-                    mouvementStock1.getSortie(),
-                    mouvementStock1.getFournisseur(),
+                    mouvementStock1.getQteAvant(),
+                    mouvementStock1.getQteMouvement(),
+                    mouvementStock1.getTypeMouvement(),
                     mouvementStock1.getPrixUnitaire()
                     )
             );

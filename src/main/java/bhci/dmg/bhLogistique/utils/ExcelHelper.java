@@ -2,6 +2,7 @@ package bhci.dmg.bhLogistique.utils;
 
 import bhci.dmg.bhLogistique.dao.Article;
 import bhci.dmg.bhLogistique.dao.MouvementStock;
+import bhci.dmg.bhLogistique.enums.TypeMouvement;
 import bhci.dmg.bhLogistique.services.ArticleService;
 import bhci.dmg.bhLogistique.services.FournisseurService;
 import org.apache.poi.ss.usermodel.Cell;
@@ -74,10 +75,12 @@ public class ExcelHelper {
                             System.out.println(e.getMessage());
                         }
                     case 2:
-                        mouvementStock.setEntree(currentCell.getNumericCellValue());
+                        mouvementStock.setQteMouvement(currentCell.getNumericCellValue());
                         break;
                     case 3:
-                        mouvementStock.setSortie(currentCell.getNumericCellValue());
+                        if (currentCell.getNumericCellValue()>0 ){
+                            mouvementStock.setTypeMouvement(TypeMouvement.SORTIE);
+                        }
                         break;
                     case 4:
                         try {

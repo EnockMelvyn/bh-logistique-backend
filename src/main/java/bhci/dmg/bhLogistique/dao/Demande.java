@@ -1,5 +1,6 @@
 package bhci.dmg.bhLogistique.dao;
 
+import bhci.dmg.bhLogistique.enums.StatutDemande;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,7 +41,7 @@ public class Demande implements Serializable {
     private String demandeur;
 
     @Column(name = "statut")
-    private StatutDemande statutDemande;
+    private StatutDemande statutDemande = StatutDemande.EN_ATTENTE;
 
     @Column(name = "urgent")
     private boolean urgent;

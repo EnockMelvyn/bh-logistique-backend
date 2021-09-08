@@ -24,11 +24,9 @@ public class MouvementStock {
     @JoinColumn(name = "article_id")
     @JsonIgnore
     private Article article;
-    private double stockInitial;
-//    private double qteMouvement;
-//    private TypeMouvement typeMouvement;
-    private double entree;
-    private double sortie;
+    private double qteAvant;
+    private double qteMouvement;
+    private TypeMouvement typeMouvement;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fournisseur_id")
     @JsonIgnore
@@ -53,13 +51,12 @@ public class MouvementStock {
     public MouvementStock() {
     }
 
-    public MouvementStock(LocalDate dateMouvement, Article article, double stockInitial, double entree, double sortie, Fournisseur fournisseur, Double prixUnitaire) {
+    public MouvementStock(LocalDate dateMouvement, Article article, double qteAvant,double qteMouvement, TypeMouvement typeMouvement, Double prixUnitaire) {
         this.dateMouvement = dateMouvement;
         this.article = article;
-        this.stockInitial = stockInitial;
-        this.entree = entree;
-        this.sortie = sortie;
-        this.fournisseur = fournisseur;
+        this.qteAvant = qteAvant;
+        this.qteMouvement = qteMouvement;
+        this.typeMouvement = typeMouvement;
         this.prixUnitaire = prixUnitaire;
     }
 }

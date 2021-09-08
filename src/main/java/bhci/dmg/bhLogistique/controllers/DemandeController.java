@@ -1,6 +1,7 @@
 package bhci.dmg.bhLogistique.controllers;
 
 import bhci.dmg.bhLogistique.dao.Demande;
+import bhci.dmg.bhLogistique.enums.StatutDemande;
 import bhci.dmg.bhLogistique.services.DemandeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,49 @@ public class DemandeController {
             else {
                     demandes.add(demandeService.getDemandeByReference(numRefDemande));
             }
+            if (demandes.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(demandes, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/statutDemande")
+    public ResponseEntity<List<Demande>> getDemandesByStatutDemande(@RequestParam(required = false) String statutDemande) {
+
+        try {
+            System.out.println("Entrée");
+            List<Demande> demandes = new ArrayList<Demande>();
+            if (statutDemande == null) {
+                demandes = demandeService.getAllDemandes();
+            }
+            else { 
+                if (statutDemande =="validé"){
+                    demandes = demandeService.getDemandeByStatutDemande(StatutDemande.VALIDEE_POUR_TRAITEMENT);
+                }
+//                switch (statutDemande) {
+//                    case "validé":
+//                        demandes = demandeService.getDemandeByStatutDemande(StatutDemande.VALIDEE_POUR_TRAITEMENT);
+//                        break;
+//                    case "rejeté":
+//                        demandes = demandeService.getDemandeByStatutDemande(StatutDemande.REJETEE);
+//                        break;
+//                    case "visa demandeur":
+//                        demandes = demandeService.getDemandeByStatutDemande(StatutDemande.VISA_DEMANDEUR);
+//                        break;
+//                    case "en attente":
+//                        demandes = demandeService.getDemandeByStatutDemande(StatutDemande.EN_ATTENTE);
+//                        break;
+//                    case "traité":
+//                        demandes = demandeService.getDemandeByStatutDemande(StatutDemande.TRAITEE);
+//                        break;
+//                    default:
+//                        break;
+//                }
+            }
+
             if (demandes.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }

@@ -32,13 +32,13 @@ public class Article implements Serializable {
     private String libelleArticle;
 
     @Column(name = "quantite_stock")
-    private int quantiteStock;
+    private int quantiteStock = 0;
 
     @Column(name = "stock_critique")
     private int stockCritique;
 
     @Column(name = "cmup")
-    private int cmup;
+    private double cmup;
 
     @ManyToOne
     @JoinColumn(name = "sous_famille_id")

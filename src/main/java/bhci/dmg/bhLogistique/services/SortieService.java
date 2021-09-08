@@ -1,8 +1,8 @@
 package bhci.dmg.bhLogistique.services;
 
-import bhci.dmg.bhLogistique.dao.Article;
-import bhci.dmg.bhLogistique.dao.Sortie;
-import bhci.dmg.bhLogistique.repository.ArticleRepository;
+import bhci.dmg.bhLogistique.dao.*;
+import bhci.dmg.bhLogistique.enums.StatutDemande;
+import bhci.dmg.bhLogistique.enums.TypeMouvement;
 import bhci.dmg.bhLogistique.repository.SortieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +16,12 @@ public class SortieService {
 
     @Autowired
     SortieRepository sortieRepository;
+    @Autowired
+    ArticleService articleService;
+    @Autowired
+    DemandeService demandeService;
+    @Autowired
+    MouvementStockService mouvementStockService;
 
     public List<Sortie> getAllSorties() {
         List<Sortie> sorties= new ArrayList<Sortie>();
@@ -44,6 +50,27 @@ public class SortieService {
 
     public Sortie createSortie(Sortie sortie) {
 
+        // création et insertion en BD du mouvement de stock
+        mouvementStockService.createMouvementStock(List.of(
+               new MouvementStock(
+                       sortie.getDateSortie(),
+                       sortie.getArticle(),
+                       sortie.getArticle().getQuantiteStock(),
+                       sortie.getQuantite(),
+                       TypeMouvement.SORTIE,
+                       sortie.getArticle().getCmup()
+               )
+        ));
+
+        // MAJ de stock article dans la BD
+        Article articleUp = sortie.getArticle();
+        articleUp.setQuantiteStock(sortie.getArticle().getQuantiteStock()+sortie.getQuantite());
+        articleService.updateArticle(articleUp.getIdArticle(), articleUp);
+
+        // MAJ du statut de la demande
+        Demande demandeUp = sortie.getDemande();
+        demandeUp.setStatutDemande(StatutDemande.VISA_DEMANDEUR);
+        demandeService.updateDemande(demandeUp.getIdDemande(), demandeUp);
         return sortieRepository.save(sortie);
     }
 }
