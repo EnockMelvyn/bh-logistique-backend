@@ -24,9 +24,9 @@ public class SortieService {
     MouvementStockService mouvementStockService;
 
     public List<Sortie> getAllSorties() {
-        List<Sortie> sorties= new ArrayList<Sortie>();
-        sortieRepository.findAll().forEach(sorties::add);
-        return sorties;
+        /*List<Sortie> sorties= new ArrayList<Sortie>();
+        sortieRepository.findAll().forEach(sorties::add);*/
+        return sortieRepository.findAll();
     }
 
     public Sortie getSortieById(Long idSortie){

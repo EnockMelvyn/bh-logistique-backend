@@ -15,9 +15,9 @@ public class FamilleService {
     FamilleRepository familleRepository;
 
     public List<Famille> getAllFamilles() {
-        List<Famille> familles = new ArrayList<Famille>();
-        familleRepository.findAll().forEach(familles::add);
-        return familles;
+        /*List<Famille> familles = new ArrayList<Famille>();
+        familleRepository.findAll().forEach(familles::add);*/
+        return familleRepository.findAll();
     }
 
     public Famille getFamilleByCode(String codeFamille) {

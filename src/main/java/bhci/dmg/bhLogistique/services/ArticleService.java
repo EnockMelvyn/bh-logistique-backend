@@ -15,9 +15,9 @@ public class ArticleService {
     ArticleRepository articleRepository;
 
     public List<Article> getAllArticles() {
-        List<Article> articles= new ArrayList<Article>();
-        articleRepository.findAll().forEach(articles::add);
-        return articles;
+        /* List<Article> articles= new ArrayList<Article>();
+        articleRepository.findAll().forEach(articles::add);*/
+        return articleRepository.findAll();
     }
 
     public Article getArticleByCode(String codeArticle) {

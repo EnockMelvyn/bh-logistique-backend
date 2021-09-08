@@ -16,9 +16,9 @@ public class SousFamilleService {
     SousFamilleRepository sousFamilleRepository;
 
     public List<SousFamille> getAllSousFamilles() {
-        List<SousFamille> sousFamilles= new ArrayList<SousFamille>();
-        sousFamilleRepository.findAll().forEach(sousFamilles::add);
-        return sousFamilles;
+        /*List<SousFamille> sousFamilles= new ArrayList<SousFamille>();
+        sousFamilleRepository.findAll().forEach(sousFamilles::add);*/
+        return sousFamilleRepository.findAll();
     }
 
     public SousFamille getSousFamilleByCode(String codeSousFamille) {
