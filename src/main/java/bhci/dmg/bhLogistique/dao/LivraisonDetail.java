@@ -9,7 +9,8 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "t_livraison_detail")
-@Data@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
+@Data
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
 public class LivraisonDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;

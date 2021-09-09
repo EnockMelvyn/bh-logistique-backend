@@ -1,9 +1,10 @@
 package bhci.dmg.bhLogistique.services;
 
 import bhci.dmg.bhLogistique.dao.Commande;
+import bhci.dmg.bhLogistique.dao.CommandeDetail;
 import bhci.dmg.bhLogistique.dao.Demande;
 import bhci.dmg.bhLogistique.dao.DemandeArticle;
-import bhci.dmg.bhLogistique.dao.StatutDemande;
+import bhci.dmg.bhLogistique.enums.StatutDemande;
 import bhci.dmg.bhLogistique.repository.CommandeRepository;
 import bhci.dmg.bhLogistique.repository.DemandeRepository;
 import bhci.dmg.bhLogistique.repository.StatusRepository;
@@ -71,25 +72,30 @@ public class CommandeService {
         Commande newCommande = new Commande();
 
         log.info("-- Création d'une nouvelle commande ! -- ");
-       /* newDemande.setDateDemande(demande.getDateDemande());
-        newDemande.setDemandeur(demande.getDemandeur());
-        newDemande.setStatutDemande(demande.getStatutDemande());
-        newDemande.setEstimation(demande.getEstimation());
-        newDemande.setUrgent(demande.isUrgent());
-        newDemande.setJustifUrgence(demande.getJustifUrgence());
-        newDemande.setNumRef(demande.getNumRef());
-        newDemande.setObservation(demande.getObservation());
-//        newDemande.setDemandeArticles(demande.getDemandeArticles());
-        newDemande.setDemandeArticles(new ArrayList<DemandeArticle>())  ;
-        for(DemandeArticle demandeArticle: demande.getDemandeArticles()){
-            DemandeArticle newDemArticle = new DemandeArticle(demandeArticle.getQuantite(), demandeArticle.getDemande(), demandeArticle.getArticle());
-            newDemande.addArticles(newDemArticle);
-        }
-//        System.out.println(newDemande.getDemandeArticles().toString());*/
-        log.info("-- Création d'une nouvelle commande ! -- ");
+//        Commande newCommande = new Commande();
+//
+//        log.info("-- Création d'une nouvelle commande ! -- ");
+//        log.info(commande.getCommandeDetails().toString());
+//        log.info(commande.toString());
+//        newCommande.setDateCommande(commande.getDateCommande());
+//        newCommande.setNumeroCommande(commande.getNumeroCommande());
+//        newCommande.setCommandeDetails(commande.getCommandeDetails());
+//
+//        for(CommandeDetail commandeDetail: commande.getCommandeDetails()){
+//            CommandeDetail newCommDet = new CommandeDetail();
+//            newCommDet.setArticle(commandeDetail.getArticle());
+//            newCommDet.setQuantite(commandeDetail.getQuantite());
+////            newCommande.getCommandeDetails().add(newCommDet);
+//            newCommande.addCommandeDetail(newCommDet);
+//
+//            log.info(newCommande.getCommandeDetails().toString());
+////            log.info("-- Création commande OK! -- ");
+//        }
+
+
 
         if(commande == null) {
-            throw  new IllegalStateException(" La commande n'pas été renseignée ");
+            throw  new IllegalStateException(" La commande n'a pas été renseignée ");
         }
         if(commande.getNumeroCommande() == null) {
             throw  new IllegalStateException(" Le numéro de la commande est obligatoire ");
@@ -101,8 +107,10 @@ public class CommandeService {
         if(commande.getCommandeDetails() == null || commande.getCommandeDetails().isEmpty())
             throw new IllegalStateException(" la commande ne contient aucun article ");
 
+        commande.getCommandeDetails().forEach(commDet -> commDet.setCommande(commande));
         commande.setStatus(statusRepository.findByCodeStatut("ATT"));
 
         return commandeRepository.save(commande);
+//        return commande;
     }
 }
