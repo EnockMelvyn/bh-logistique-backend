@@ -21,12 +21,12 @@ public class CommandeController {
     CommandeService commandeService;
 
     @GetMapping
-    public ResponseEntity<List<Commande>> getAllDemandes(@RequestParam(required = false) String numeroCommande) {
+    public ResponseEntity<List<Commande>> getAllCommandes(@RequestParam(required = false) String numeroCommande) {
 
         try {
             List<Commande> commandes = new ArrayList<Commande>();
             if (numeroCommande == null) {
-                commandes = commandeService.getAllDemandes();
+                commandes = commandeService.getAllCommandes();
             }
             else {
                 commandes.add(commandeService.getCommandeByNumber(numeroCommande));
@@ -41,7 +41,7 @@ public class CommandeController {
     }
 
     @GetMapping("/{idCommande}")
-    public ResponseEntity<Commande> getDemandeById(@PathVariable Long idCommande){
+    public ResponseEntity<Commande> getCommandeById(@PathVariable Long idCommande){
         Commande commande = new Commande();
         commande = commandeService.getCommandeById(idCommande);
 
@@ -55,19 +55,23 @@ public class CommandeController {
     public ResponseEntity<Commande> createCommande(@RequestBody Commande commande) {
         return new ResponseEntity<>(commandeService.createCommande(commande), HttpStatus.CREATED);
     }
+
+    @PutMapping("/validate")
+    public ResponseEntity<Commande> validateCommande(@RequestParam Long idCommande) {
+        return new ResponseEntity<>(commandeService.validateCommande(idCommande), HttpStatus.OK);
+    }
+
+    @PutMapping("/refuse")
+    public ResponseEntity<Commande> refuseDemande(@RequestParam Long idCommande) {
+        return new ResponseEntity<>(commandeService.refuseCommande(idCommande), HttpStatus.OK);
+    }
 /*
     @PutMapping("/{idDemande}")
     public ResponseEntity<Commande> updateDemande(@PathVariable Long idDemande, @RequestBody Commande demande) {
         return new ResponseEntity<>(commandeService.updateCommande(idDemande, demande), HttpStatus.OK);
     }
 
-    @PutMapping("/validate/{idDemande}")
-    public ResponseEntity<Demande> validateOrRefuseDemande(@PathVariable Long idDemande) {
-        return new ResponseEntity<>(commandeService.validateDemande(idDemande), HttpStatus.OK);
-    }
 
-    @PutMapping("/refuse/{idDemande}")
-    public ResponseEntity<Demande> refuseDemande(@PathVariable Long idDemande) {
-        return new ResponseEntity<>(commandeService.refuseDemande(idDemande), HttpStatus.OK);
-    }*/
+
+    */
 }

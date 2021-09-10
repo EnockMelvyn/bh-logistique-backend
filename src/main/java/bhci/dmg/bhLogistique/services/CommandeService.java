@@ -1,20 +1,14 @@
 package bhci.dmg.bhLogistique.services;
 
 import bhci.dmg.bhLogistique.dao.Commande;
-import bhci.dmg.bhLogistique.dao.CommandeDetail;
-import bhci.dmg.bhLogistique.dao.Demande;
-import bhci.dmg.bhLogistique.dao.DemandeArticle;
-import bhci.dmg.bhLogistique.enums.StatutDemande;
+import bhci.dmg.bhLogistique.dao.Status;
 import bhci.dmg.bhLogistique.repository.CommandeRepository;
-import bhci.dmg.bhLogistique.repository.DemandeRepository;
 import bhci.dmg.bhLogistique.repository.StatusRepository;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Log
@@ -27,7 +21,7 @@ public class CommandeService {
     @Autowired
     StatusRepository statusRepository;
 
-    public List<Commande> getAllDemandes(){
+    public List<Commande> getAllCommandes(){
         return commandeRepository.findAll();
     }
 
@@ -49,51 +43,32 @@ public class CommandeService {
 
         return commandeRepository.save(commande1);
     }
-/*
-    public Demande validateCommande (Long idDemande ){
-        Demande demande1 = demandeRepository.findById(idDemande).orElseThrow(() ->
-                new IllegalStateException(" L'id famille:" + idDemande+" n'existe pas"));
 
-        demande1.setStatutCommande(StatutDemande.VALIDEE);
+    public Commande validateCommande (Long idCommande ){
+        Commande commande1 = commandeRepository.findById(idCommande).orElseThrow(() ->
+                new IllegalStateException(" L'id famille:" + idCommande+" n'existe pas"));
 
-        return demandeRepository.save(demande1);
+        commande1.setStatus(statusRepository.findByCodeStatut("VAL"));
+
+        return commandeRepository.save(commande1);
     }
 
     public Commande refuseCommande (Long idCommande){
-        Demande demande1 = commandeRepository.findById(idCommande).orElseThrow(() ->
+        Commande commande1 = commandeRepository.findById(idCommande).orElseThrow(() ->
                 new IllegalStateException(" L'id famille:" + idCommande+" n'existe pas"));
 
-        demande1.setStatutDemande(StatutDemande.REFUSEE);
+        commande1.setStatus(statusRepository.findByCodeStatut("REF"));
 
-        return demandeRepository.save(demande1);
+        return commandeRepository.save(commande1);
     }
-*/
+
     public Commande createCommande(Commande commande){
         Commande newCommande = new Commande();
 
         log.info("-- Création d'une nouvelle commande ! -- ");
-//        Commande newCommande = new Commande();
-//
-//        log.info("-- Création d'une nouvelle commande ! -- ");
-//        log.info(commande.getCommandeDetails().toString());
-//        log.info(commande.toString());
-//        newCommande.setDateCommande(commande.getDateCommande());
-//        newCommande.setNumeroCommande(commande.getNumeroCommande());
-//        newCommande.setCommandeDetails(commande.getCommandeDetails());
-//
-//        for(CommandeDetail commandeDetail: commande.getCommandeDetails()){
-//            CommandeDetail newCommDet = new CommandeDetail();
-//            newCommDet.setArticle(commandeDetail.getArticle());
-//            newCommDet.setQuantite(commandeDetail.getQuantite());
-////            newCommande.getCommandeDetails().add(newCommDet);
-//            newCommande.addCommandeDetail(newCommDet);
-//
-//            log.info(newCommande.getCommandeDetails().toString());
-////            log.info("-- Création commande OK! -- ");
-//        }
-
-
-
+        if (commandeRepository.findByNumeroCommande(commande.getNumeroCommande()).isPresent()){
+            throw  new IllegalStateException(" Cette commande a déjà été enregistrée");
+        }
         if(commande == null) {
             throw  new IllegalStateException(" La commande n'a pas été renseignée ");
         }
