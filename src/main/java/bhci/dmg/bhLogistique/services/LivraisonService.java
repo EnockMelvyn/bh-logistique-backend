@@ -2,6 +2,8 @@ package bhci.dmg.bhLogistique.services;
 
 import bhci.dmg.bhLogistique.dao.Livraison;
 import bhci.dmg.bhLogistique.dao.LivraisonDetail;
+import bhci.dmg.bhLogistique.dao.MouvementStock;
+import bhci.dmg.bhLogistique.enums.TypeMouvement;
 import bhci.dmg.bhLogistique.repository.LivraisonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,8 @@ public class LivraisonService {
 
     @Autowired
     LivraisonRepository livraisonRepository;
+
+    MouvementStockService mouvementStockService;
 
     public List<Livraison> getAllLivraisons() {
         /*List<Livraison> livraisons= new ArrayList<Livraison>();
@@ -74,7 +78,20 @@ public class LivraisonService {
             newLivDet.setPrixUnitaire(livraisonDetail.getPrixUnitaire());
 
             livraison1.addLivraisonDetail(newLivDet);
+
+            mouvementStockService.createMouvementStock(List.of(
+                    new MouvementStock(
+                            livraison.getDateLivraison(),
+                            livraisonDetail.getArticle(),
+                            livraisonDetail.getArticle().getQuantiteStock(),
+                            livraisonDetail.getQuantite(),
+                            TypeMouvement.ENTREE,
+                            livraisonDetail.getPrixUnitaire()
+                    )
+            ));
         }
+
+
         return livraisonRepository.save(livraison1);
     }
 }
