@@ -57,12 +57,12 @@ public class CommandeController {
     }
 
     @PutMapping("/validate")
-    public ResponseEntity<Commande> validateCommande(@RequestParam Long idCommande) {
+    public ResponseEntity<Commande> validateCommande(@RequestParam("idCommande") Long idCommande) {
         return new ResponseEntity<>(commandeService.validateCommande(idCommande), HttpStatus.OK);
     }
 
     @PutMapping("/refuse")
-    public ResponseEntity<Commande> refuseDemande(@RequestParam Long idCommande) {
+    public ResponseEntity<Commande> refuseDemande(@RequestParam("idCommande") Long idCommande) {
         return new ResponseEntity<>(commandeService.refuseCommande(idCommande), HttpStatus.OK);
     }
 /*

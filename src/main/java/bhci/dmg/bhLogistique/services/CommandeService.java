@@ -57,7 +57,7 @@ public class CommandeService {
         Commande commande1 = commandeRepository.findById(idCommande).orElseThrow(() ->
                 new IllegalStateException(" L'id famille:" + idCommande+" n'existe pas"));
 
-        commande1.setStatus(statusRepository.findByCodeStatut("REF"));
+        commande1.setStatus(statusRepository.findByCodeStatut("REJ"));
 
         return commandeRepository.save(commande1);
     }
